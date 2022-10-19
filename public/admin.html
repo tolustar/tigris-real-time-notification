@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My-Commerce Inventory Admin Backend</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+    crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="mt-5">
+          <h2>Admin Backend</h2>
+          <h3 class="text-secondary">My-Commerce Inventory</h3>
+        </div>
+        <div class="form mt-3">
+          <div class="mb-3">
+            <label for="productName" class="form-label">Product
+              Id</label>
+            <input type="text" class="form-control" id="productId"
+              placeholder="">
+          </div>
+          <div class="mb-3">
+            <label for="productName" class="form-label">Product
+              Name</label>
+            <input type="text" class="form-control" id="productName"
+              placeholder="">
+          </div>
+          <div class="mb-3">
+            <label for="productOldAmount" class="form-label">Product Old
+              Amount</label>
+            <input type="text" class="form-control" id="productOldAmount"
+              placeholder="">
+          </div>
+          <div class="mb-3">
+            <label for="productNewAmount" class="form-label">Product New
+              Amount</label>
+            <input type="text" class="form-control" id="productNewAmount"
+              placeholder="">
+          </div>
+          <div class="mb-3">
+            <label for="productDescription" class="form-label">Product
+              Description</label>
+            <textarea class="form-control" id="productDescription"
+              rows="3"></textarea>
+          </div>
+          <button onclick="addToInventory()"
+            class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+
+  <script>
+    function addToInventory() {
+      const BASE_URL = "http://localhost:8080";
+      const productId = document.getElementById("productId")?.value;
+      const productName = document.getElementById("productName")?.value;
+      const oldAmount = document.getElementById("productOldAmount")?.value;
+      const newAmount = document.getElementById("productNewAmount")?.value;
+      const productDescription = document.getElementById("productDescription")?.value;
+
+
+      fetch(`${BASE_URL}/inventory/publish`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(
+          {
+            productId,
+            productName,
+            oldAmount,
+            newAmount,
+            productDescription,
+          },
+        ),
+      });
+    }
+
+  </script>
+
+
+</body>
+
+</html>
